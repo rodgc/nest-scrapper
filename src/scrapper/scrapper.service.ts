@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
-import { PlayersDto } from './dtos/players.dto';
+import { GetACSDto } from './dtos/get-acs-dto';
 
 @Injectable()
 export class ScrapperService {
-  async getValorantACS(players: PlayersDto[]) {
+  async getValorantACS({ playlist, players }: GetACSDto) {
+    console.log(`Getting information for ${playlist} playlist`);
     for (const player of players) {
       console.log(`Getting ${player.username} ACS`);
-      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23LAN/overview?playlist=unrated`;
+      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23LAN/overview?playlist=${playlist}`;
       const browser = await puppeteer.launch({
         headless: 'new',
       });
