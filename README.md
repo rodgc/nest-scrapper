@@ -5,6 +5,7 @@ NestJS Scrapper is a [NestJS](https://github.com/nestjs/nest) playground to lear
 ## Installation
 
 ```bash
+# Install Dependencies
 $ npm install
 ```
 
