@@ -7,8 +7,8 @@ export class ScrapperService {
   async getValorantACS({ playlist, players }: GetACSDto) {
     console.log(`Getting information for ${playlist} playlist`);
     for (const player of players) {
-      console.log(`Getting ${player.username} ACS`);
-      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23LAN/overview?playlist=${playlist}`;
+      console.log(`Getting ${player.username} #${player.discriminator} ACS`);
+      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23${player.discriminator}/overview?playlist=${playlist}`;
       const browser = await puppeteer.launch({
         headless: 'new',
       });
@@ -28,7 +28,9 @@ export class ScrapperService {
         return acs;
       });
       player.acs = results;
-      console.log(`${player.acs} ACS obtained for ${player.username}`);
+      console.log(
+        `${player.acs} ACS obtained for ${player.username} #${player.discriminator}`,
+      );
       await browser.close();
     }
     players.sort((a, b) => b.acs - a.acs);

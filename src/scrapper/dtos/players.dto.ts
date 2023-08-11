@@ -17,4 +17,12 @@ export class PlayersDto {
   })
   @IsNumber()
   acs: number;
+
+  @ApiProperty({
+    type: String,
+    description: 'Player discriminator',
+  })
+  @IsString()
+  @IsNotEmpty()
+  discriminator: string;
 }
