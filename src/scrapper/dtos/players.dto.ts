@@ -20,9 +20,9 @@ export class PlayersDto {
 
   @ApiProperty({
     type: String,
-    description: 'Player discriminator',
+    description: 'Player Tagline',
   })
   @IsString()
   @IsNotEmpty()
-  discriminator: string;
+  tagline: string;
 }

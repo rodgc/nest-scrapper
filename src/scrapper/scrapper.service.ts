@@ -8,10 +8,8 @@ export class ScrapperService {
   async getValorantACS({ playlist, players }: GetACSDto) {
     this.logger.log(`Getting information for ${playlist} playlist`);
     for (const player of players) {
-      this.logger.log(
-        `Getting ${player.username} #${player.discriminator} ACS`,
-      );
-      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23${player.discriminator}/overview?playlist=${playlist}`;
+      this.logger.log(`Getting ${player.username} #${player.tagline} ACS`);
+      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23${player.tagline}/overview?playlist=${playlist}`;
       const browser = await puppeteer.launch({
         headless: 'new',
       });
@@ -31,7 +29,7 @@ export class ScrapperService {
         return acs;
       });
       player.acs = results;
-      const acsMessage = `${player.acs} ACS obtained for ${player.username} #${player.discriminator}`;
+      const acsMessage = `${player.acs} ACS obtained for ${player.username} #${player.tagline}`;
       if (player.acs > 0) {
         this.logger.log(acsMessage);
       } else {
