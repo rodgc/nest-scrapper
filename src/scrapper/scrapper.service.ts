@@ -1,11 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
-import { GetACSDto } from './dtos/get-acs-dto';
+import { GetACSDto, Playlists } from './dtos/get-acs-dto';
 import { PlayersDto } from './dtos/players.dto';
 
 @Injectable()
 export class ScrapperService {
   private readonly logger = new Logger(ScrapperService.name);
+
+  private constructURL(
+    username: string,
+    tagline: string,
+    playlist: Playlists,
+  ): string {
+    return `https://tracker.gg/valorant/profile/riot/${username}%23${tagline}/overview?playlist=${playlist}`;
+  }
 
   async getValorantACS({
     playlist,
@@ -15,8 +23,7 @@ export class ScrapperService {
 
     for (const player of players) {
       this.logger.log(`Getting ${player.username} #${player.tagline} ACS`);
-
-      const URL = `https://tracker.gg/valorant/profile/riot/${player.username}%23${player.tagline}/overview?playlist=${playlist}`;
+      const URL = this.constructURL(player.username, player.tagline, playlist);
       const browser = await puppeteer.launch({
         headless: 'new',
       });

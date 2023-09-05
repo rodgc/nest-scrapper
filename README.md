@@ -80,9 +80,9 @@ In this example, we create an instance of the `ScrapperService` class and provid
 
 #### Methods
 
-- `getValorantACS({ playlist, players }: GetACSDto): Promise<PlayersDto[]>`:
+- `constructURL(username: string, tagline: string, playlist: Playlists): string`: Constructs the URL for scraping player ACS data based on the username, tagline, and playlist.
 
-  - This method takes a `GetACSDto` object as input and returns a promise that resolves to an array of `PlayersDto` objects. It iterates over each player in the `players` array, retrieves their ACS from a website using Puppeteer, and updates the player object with the obtained ACS value. Finally, it sorts the players based on their ACS and returns the updated list.
+- `getValorantACS({ playlist, players }: GetACSDto): Promise<PlayersDto[]>`: This method takes a `GetACSDto` object as input and returns a promise that resolves to an array of `PlayersDto` objects. It iterates over each player in the `players` array, retrieves their ACS from a website using Puppeteer, and updates the player object with the obtained ACS value. Finally, it sorts the players based on their ACS and returns the updated list.
 
 ## License
 
