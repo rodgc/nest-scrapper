@@ -2,7 +2,7 @@ import { ArrayMinSize, IsArray, IsIn, ValidateNested } from 'class-validator';
 import { PlayersDto } from './players.dto';
 import { Type } from 'class-transformer';
 
-type Playlists = 'competitive' | 'unrated';
+export type Playlists = 'competitive' | 'unrated';
 const playlistEnum: Playlists[] = ['unrated', 'competitive'];
 
 export class GetACSDto {
